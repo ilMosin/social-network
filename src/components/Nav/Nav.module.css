@@ -1,0 +1,14 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    
+}
+.wrapper a {
+    text-decoration: none;
+    padding-left: 20px;
+    color: gray;
+    font-size: 20px;
+}
+nav {
+    padding: 0 50px;
+}

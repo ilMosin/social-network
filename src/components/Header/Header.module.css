@@ -1,0 +1,12 @@
+header{
+    padding: 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+header a {
+    text-decoration: none;
+    padding-left: 20px;
+    color: gray;
+    font-size: 24px;
+}

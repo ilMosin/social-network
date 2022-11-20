@@ -1,23 +1,34 @@
-import logo from './logo.svg';
+import {Routes, Route} from "react-router-dom";
 import './App.css';
+import Notfound from './pages/NoFound/Notfound'
+import PostPage from "./pages/PostPage/PostPage";
+import Settings from "./pages/Settings/Settings";
+import Layout from "./components/Layout/Layout";
+import Friends from "./components/Friends/Friends";
+import Profile from "./components/Profile/Profile";
+import Groups from "./components/Groups/Groups";
+import Dialogs from "./pages/Dialogs/DIalogs";
+import Homepage from "./pages/Home/Home";
 
-function App() {
+function App(props) {
+    console.log('props',props)
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
+        <Routes>
+            <Route path='/' element={ <Layout />}>
+                <Route path='home' element={<Homepage />} />
+                <Route path='post' element={<PostPage posts={props?.state?.postPage?.posts || {}}/>}/>
+                <Route path='dialogs/' element={<Dialogs {...props?.state?.messagesPage} />} />
+            </Route>
+            <Route path='/' element={ <Layout /> }>
+                <Route path='settings' element={<Settings/>}/>
+                <Route path='friends' element={<Friends/>}/>
+                <Route path='profile' element={<Profile/>}/>
+                <Route path='groups' element={<Groups/>}/>
+                <Route path='*' element={<Notfound/>}/>
+            </Route>
+        </Routes>
     </div>
   );
 }
