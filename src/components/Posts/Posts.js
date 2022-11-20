@@ -1,34 +1,40 @@
-import { useState } from "react";
-
+import React from "react";
 import Post from "./Post/Post";
 import style from './Posts.module.css'
+import {type} from "@testing-library/user-event/dist/type";
+import {addPostActionCreator, updateNewPostTextActionCreator} from "../../store/Reducers/postReducer";
 
-const Posts = ({ posts }) => {
-    const { id, message, likesCount } = posts;
+const Posts = (props) => {
+    const {posts} = props;
 
-    const [newPostMessage, setNewPostMessage] = useState('')
+    let postElements = posts.map(post => <Post key={post.post} message={post.message} likesCount={post.likesCount}/>)
 
-    const addPost =()=>{
-        alert(newPostMessage);
+    let newPostElement = React.createRef();
+
+    let addPost = () => {
+        props.dispatch(addPostActionCreator());
+        newPostElement.current.value = '';
     }
 
-    const handleOnChange = (e) => {
+    let handleOnChangePosts = (e) => {
         const value = e.target.value;
-
-        console.log('OnChange textarea', value )
-        setNewPostMessage(value)
+        let action = updateNewPostTextActionCreator(value);
+        props.dispatch(action);
+        console.log('OnChange textarea', value)
     }
 
     return (
-            <div className={style.posts}>
-                My Posts
-                <div>
-                    <textarea onChange={handleOnChange} />
-                    <button onClick={addPost}>Add Post</button>
-                </div>
-                {posts.map(post => <Post key={id} message={message}  likesCount={likesCount} />)}
+        <div className={style.posts}>
+            My Posts
+            <div>
+                <textarea ref={newPostElement}
+                          value={props.newPostText}
+                          onChange={handleOnChangePosts}/>
+                <button onClick={addPost}>Add Post</button>
             </div>
+            {postElements}
+        </div>
     );
-}
+};
 
 export default Posts;

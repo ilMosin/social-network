@@ -12,25 +12,32 @@ import Homepage from "./pages/Home/Home";
 
 function App(props) {
     console.log('props',props)
-  return (
-    <div className="App">
+    return (
+        <div className="App">
+            <Routes>
+                <Route path='/' element={ <Layout />}>
+                    <Route path='home' element={<Homepage />} />
+                    <Route path='post' element={<PostPage posts={props?.state?.postPage?.posts || {}}
+                                                          dispatch={props.dispatch}
+                                                          newPostText={props?.state?.postPage?.newPostText || {}}
+                    />}/>
+                    <Route path='dialogs/' element={<Dialogs messages={props?.state?.messagesPage?.messages || {}}
+                                                             dialogs={props?.state?.messagesPage?.dialogs || {}}
+                                                             dispatch={props.dispatch}
+                                                             newMessageText={props?.state?.messagesPage?.newMessageText || {}}
 
-        <Routes>
-            <Route path='/' element={ <Layout />}>
-                <Route path='home' element={<Homepage />} />
-                <Route path='post' element={<PostPage posts={props?.state?.postPage?.posts || {}}/>}/>
-                <Route path='dialogs/' element={<Dialogs {...props?.state?.messagesPage} />} />
-            </Route>
-            <Route path='/' element={ <Layout /> }>
-                <Route path='settings' element={<Settings/>}/>
-                <Route path='friends' element={<Friends/>}/>
-                <Route path='profile' element={<Profile/>}/>
-                <Route path='groups' element={<Groups/>}/>
-                <Route path='*' element={<Notfound/>}/>
-            </Route>
-        </Routes>
-    </div>
-  );
+                    />} />
+                </Route>
+                <Route path='/' element={ <Layout /> }>
+                    <Route path='settings' element={<Settings/>}/>
+                    <Route path='friends' element={<Friends/>}/>
+                    <Route path='profile' element={<Profile/>}/>
+                    <Route path='groups' element={<Groups/>}/>
+                    <Route path='*' element={<Notfound/>}/>
+                </Route>
+            </Routes>
+        </div>
+    );
 }
 
 export default App;

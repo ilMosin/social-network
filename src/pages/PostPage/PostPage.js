@@ -1,11 +1,16 @@
 import React from "react";
 import Posts from "../../components/Posts/Posts";
+
+
 const PostPage = (props)=>{
-    const { posts } = props;
+    const { posts, newPostText } = props;
 
     return (
         <div>
-            <Posts posts={posts}/>
+            <Posts posts={posts}
+                   newPostText={newPostText}
+                   dispatch={props.dispatch}
+            />
         </div>
     );
 }
