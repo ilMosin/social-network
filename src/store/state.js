@@ -1,3 +1,4 @@
+/*
 import postReducer from "./Reducers/postReducer";
 import messageReducer from "./Reducers/MessageReducer";
 
@@ -51,3 +52,4 @@ let store = {
 
 export default store;
 window.store = store;
+*/
